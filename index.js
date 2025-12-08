@@ -5,6 +5,8 @@ import rutasProductos from "./src/routes/products.routes.js"
 import rutasLogin from "./src/routes/auth.routes.js"
 const app = express()
 const PORT = process.env.PORT || 3000;
+import { connectDB } from "./src/data/mongo.js";
+
 
  const corsConfig = {
     origin: ['http://localhost:3000', 'https://midominio.com'],
@@ -18,6 +20,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors(corsConfig))
 app.use(express.json())
+
+await connectDB();
+
 app.use("/api", rutasLogin) 
 app.use("/api", rutasProductos)
 

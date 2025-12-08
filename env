@@ -1,8 +1,0 @@
-MONGO_URI=mongodb+srv://ebellanti:Vivaelamor_22@blogdb.kf4booo.mongodb.net/?appName=BlogDB
-MONGO_DB_NAME=ecommerce
-MONGO_USER=ebellanti
-MONGO_PASS=Vivaelamor_22
-
-PORT=3000
-JWT_SECRET_KEY=hlah4uhauih4uih
-NODE_ENV=development

@@ -16,7 +16,7 @@ import { Product } from "../models/products.models.js";
 // }
 
 
-export function agregarProducto(producto) {
+export function addProductService(producto) {
   return new Promise(async (res, rej) => {
     try {
       const newProduct = await Product.create(producto);
