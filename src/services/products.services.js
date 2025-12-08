@@ -1,5 +1,5 @@
 // import {agregarProducto, eliminarProducto, obtenerProducto, obtenerProductos} from "../models/products.models.js";
-import { Product } from "../models/products.models.js";
+import { Product, obtenerProductos, actualizarProducto, eliminarProducto, obtenerProducto } from "../models/products.models.js";
 
 
 // export const addProductService = async (product) => {
@@ -29,7 +29,6 @@ export function addProductService(producto) {
   });
 }
 
-/*
 export const deleteProductService = async (id) => {
   console.log(id)
   return(
@@ -56,12 +55,12 @@ export const editProductService = async (id, product) => {
       }
     })
   )
-}
+};
 
 export const getAllProductsService = async () => {
   return(
     new Promise(async (res,rej)=> {
-      console.log("test2 dentro de servicio")
+      console.log("Test dentro del servicio")
       try{
         const productos = await obtenerProductos()
         res(productos);
@@ -84,4 +83,3 @@ export const getProductByIdService = async (id) => {
     })
   )
 };
-*/

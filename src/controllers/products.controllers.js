@@ -15,7 +15,6 @@ export const addProduct = async (req, res) => {
     }
 }
 
-/*
 export const deleteProduct = async (req, res) => {
     try{
         const id = req.params.id;
@@ -30,21 +29,30 @@ export const deleteProduct = async (req, res) => {
     }  
 }
 
-
 export const editProduct = async (req, res) => {
-    try{
-        const id = req.params.id
-        const product = req.body
-        if (id && product){
-            const newProduct = await productService.editProductService(id, product)
+    try {
+        const id = req.params.id;
+        const product = req.body;
+
+        console.log("ID recibido:", id);
+        console.log("Body recibido:", product);
+
+        if (id && product) {
+            const newProduct = await productService.editProductService(id, product);
+            if (!newProduct) {
+                console.log("No se encontró el producto para actualizar");
+                return res.status(404).json({ error: "Producto no encontrado" });
+            }
             res.status(200).json(newProduct);
-        }else{
-            res.status(400).json(error)
+        } else {
+            console.log("Faltan datos en la request");
+            res.status(400).json({ error: "Faltan datos en la request" });
         }
-    }catch(error){
-        res.status(500).send()
+    } catch (error) {
+        console.error("Error en editProduct:", error);
+        res.status(500).json({ error: "Error interno del servidor", detalle: error.message });
     }
-}
+};
 
 export const getAllProducts = async (req, res) => {
     try{
@@ -76,4 +84,3 @@ export const getProductById = async (req, res) => {
     }
 
 };
-*/
