@@ -1,5 +1,6 @@
 // import {agregarProducto, eliminarProducto, obtenerProducto, obtenerProductos} from "../models/products.models.js";
-import mongoose from 'mongoose';
+import { Product } from "../models/products.models.js";
+
 
 // export const addProductService = async (product) => {
 //   return(
@@ -14,18 +15,19 @@ import mongoose from 'mongoose';
 //   )
 // }
 
-// Define el esquema del producto
-const productSchema = new mongoose.Schema({
-  nombre: { type: String, required: true },
-  categoria: { type: String, required: true },
-  precio: { type: Number, required: true }
-  // agrega otros campos si es necesario
-});
 
-const Product = mongoose.model("Product", productSchema);
-
-export default Product;
-
+export function agregarProducto(producto) {
+  return new Promise(async (res, rej) => {
+    try {
+      const newProduct = await Product.create(producto);
+      // Mongo usa _id, lo convertimos a id para mantener compatibilidad
+      res({ ...newProduct.toObject(), id: newProduct._id });
+    } catch (error) {
+      console.log(error);
+      rej(error);
+    }
+  });
+}
 
 /*
 export const deleteProductService = async (id) => {

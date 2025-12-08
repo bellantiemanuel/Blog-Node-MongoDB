@@ -1,6 +1,6 @@
 // import { db } from "../data/data.js";
 // import { doc, getDoc, collection, getDocs, setDoc, addDoc, updateDoc, deleteDoc, } from "firebase/firestore";
-import Product from "./product.models.js";
+import mongoose from 'mongoose';
 
 // export function obtenerProducto(id){
 //   return new Promise(async (res, rej) => {
@@ -25,18 +25,15 @@ import Product from "./product.models.js";
 //   })
 // }
 
-export function agregarProducto(producto) {
-  return new Promise(async (res, rej) => {
-    try {
-      const newProduct = await Product.create(producto);
-      // Mongo usa _id, lo convertimos a id para mantener compatibilidad
-      res({ ...newProduct.toObject(), id: newProduct._id });
-    } catch (error) {
-      console.log(error);
-      rej(error);
-    }
-  });
-}
+// Define el esquema del producto
+
+const productSchema = new mongoose.Schema({
+  nombre: { type: String, required: true },
+  categoria: { type: String, required: true },
+  precio: { type: Number, required: true },
+}, { timestamps: true });
+
+export const Product = mongoose.model("Product", productSchema);
 
 /*
 export function obtenerProductos(){

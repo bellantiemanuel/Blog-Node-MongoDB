@@ -10,7 +10,8 @@ export const addProduct = async (req, res) => {
         const newProduct = await productService.addProductService(product)
         res.status(200).json(newProduct);
     }catch(error){
-        res.status(500).send()
+        console.error(error);
+        res.status(500).send("Error al crear producto");
     }
 }
 
