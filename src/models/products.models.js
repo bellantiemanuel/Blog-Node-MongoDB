@@ -1,6 +1,6 @@
 // import { db } from "../data/data.js";
 // import { doc, getDoc, collection, getDocs, setDoc, addDoc, updateDoc, deleteDoc, } from "firebase/firestore";
-import Product from "./product.model.js";
+import Product from "./product.models.js";
 
 // export function obtenerProducto(id){
 //   return new Promise(async (res, rej) => {
