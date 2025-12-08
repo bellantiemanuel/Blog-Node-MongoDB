@@ -1,31 +1,44 @@
-import { db } from "../data/data.js";
-import { doc, getDoc, collection, getDocs, setDoc, addDoc, updateDoc, deleteDoc, } from "firebase/firestore";
+// import { db } from "../data/data.js";
+// import { doc, getDoc, collection, getDocs, setDoc, addDoc, updateDoc, deleteDoc, } from "firebase/firestore";
+import Product from "./product.model.js";
 
-export function obtenerProducto(id){
+// export function obtenerProducto(id){
+//   return new Promise(async (res, rej) => {
+//     try{
+//       const docRef = doc(db, "products", id);
+//       const docSnap = await getDoc(docRef);
+
+//       if (docSnap.exists()) {
+//         console.log("Snap data: ", docSnap)
+//         console.log("Document ID:", docSnap.id);
+//         console.log("Document data:", docSnap.data());
+//         res(docSnap.data())
+//       } else {
+//         // docSnap.data() will be undefined in this case
+//         console.log("No such document!");
+//         res()
+//       }
+//     }catch(error){
+//       console.log(error)
+//       rej(error)
+//     }
+//   })
+// }
+
+export function agregarProducto(producto) {
   return new Promise(async (res, rej) => {
-    try{
-      const docRef = doc(db, "products", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        console.log("Snap data: ", docSnap)
-        console.log("Document ID:", docSnap.id);
-        console.log("Document data:", docSnap.data());
-        res(docSnap.data())
-      } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-        res()
-      }
-    }catch(error){
-      console.log(error)
-      rej(error)
+    try {
+      const newProduct = await Product.create(producto);
+      // Mongo usa _id, lo convertimos a id para mantener compatibilidad
+      res({ ...newProduct.toObject(), id: newProduct._id });
+    } catch (error) {
+      console.log(error);
+      rej(error);
     }
-  })
-  
+  });
 }
-//obtenerProducto(id)
 
+/*
 export function obtenerProductos(){
   return(
     new Promise(async (res, rej) => {
@@ -47,7 +60,7 @@ export function obtenerProductos(){
     })
   )
 }
-obtenerProductos()
+
 
 export function agregarProducto(producto){
   return(
@@ -66,7 +79,7 @@ export function agregarProducto(producto){
 }
 
 //agregarProducto({nombre: "yerba", categoria: "infusion", precio: 200})
-/*
+
 export function actualizarProducto(id, producto){
   return(
     new Promise(async (res, rej) => {
@@ -83,7 +96,7 @@ export function actualizarProducto(id, producto){
     })
   )
 
-}*/
+}
 
 //actualizarProducto({id: "6VOeGkGEHLxBrdU3QVzV", precio: 220})
 
@@ -100,5 +113,5 @@ export function eliminarProducto(id){
       }
     })
   )
-
 }
+*/

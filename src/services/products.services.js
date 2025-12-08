@@ -1,19 +1,33 @@
-import {agregarProducto, eliminarProducto, obtenerProducto, obtenerProductos} from "../models/products.models.js";
+// import {agregarProducto, eliminarProducto, obtenerProducto, obtenerProductos} from "../models/products.models.js";
+import mongoose from 'mongoose';
 
-export const addProductService = async (product) => {
-  return(
-    new Promise(async (res, rej) => {
-      try{
-        const newProduct = await agregarProducto(product)
-        res(newProduct)
-      }catch(error){
-        rej(error)
-      }
-    })
-  )
+// export const addProductService = async (product) => {
+//   return(
+//     new Promise(async (res, rej) => {
+//       try{
+//         const newProduct = await agregarProducto(product)
+//         res(newProduct)
+//       }catch(error){
+//         rej(error)
+//       }
+//     })
+//   )
+// }
 
-}
+// Define el esquema del producto
+const productSchema = new mongoose.Schema({
+  nombre: { type: String, required: true },
+  categoria: { type: String, required: true },
+  precio: { type: Number, required: true }
+  // agrega otros campos si es necesario
+});
 
+const Product = mongoose.model("Product", productSchema);
+
+export default Product;
+
+
+/*
 export const deleteProductService = async (id) => {
   console.log(id)
   return(
@@ -29,7 +43,6 @@ export const deleteProductService = async (id) => {
   )
 }
 
-/*
 export const editProductService = async (id, product) => {
   return(
     new Promise(async (res, rej) => {
@@ -41,7 +54,7 @@ export const editProductService = async (id, product) => {
       }
     })
   )
-}*/
+}
 
 export const getAllProductsService = async () => {
   return(
@@ -69,3 +82,4 @@ export const getProductByIdService = async (id) => {
     })
   )
 };
+*/
